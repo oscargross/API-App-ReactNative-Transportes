@@ -9,7 +9,12 @@ const drivers = new mongoose.Schema({
         type: String,
         required: true
     },
+    clt:{
+        type: String,
+        required: true
+    }
     
 })
+const driver = mongoose.model('drivers', drivers)
+export default driver
 
-export default mongoose.model('drivers', drivers)
