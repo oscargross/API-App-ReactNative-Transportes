@@ -4,56 +4,36 @@ import  * as DriverService from '../services/DriverService'
 
 // create - post - /users
 
-export let createUser = async(req: Request, res: Response) => {
-    let user = req.body;
-    await DriverService.createUser({user}, (result:any)=>{
-        res.send(result)
-    })    
+export let createDriver = async(req: Request, res: Response) => {
+    let driver = req.body;
+    res.send (await DriverService.createDriver ({driver}))  
 };
 
 
 
 // read - get - /users/{id}
-export let readUser = async (req: Request, res: Response) =>  {
+export let readAllDrivers = async (req: Request, res: Response)=>  {
+    res.send(await DriverService.readAllDrivers())
+   
+};
+
+
+export let findDriverByParam = async (req: Request, res: Response)=>  {
+    let param = req.params.param
+    res.send(await DriverService.findDriverByParam({param}))
+   
+};
+
+export let updateDriver = async (req: Request, res: Response)=>  {
     let id = req.params.id
-    await DriverService.readUser({id}, (result: any) => {
-        res.send(result)
-    })
+    let info = req.body;
+
+    res.send(await DriverService.updateDriver({id, info}))
+   
 };
 
-// update - post = /users/{id}
-
-export let updateUser = async(req: Request, res: Response) => {
+export let deleteDriver = async (req: Request, res: Response)=>  {
     let id = req.params.id
-    let user = req.body
-    await DriverService.updateUser({id, user}, (result: any) => {
-        res.send(result)
-
-    })
-};
-
-// delete - delete = /users/{id}
-
-export let deleteUser = async(req: Request, res: Response) => {
-    let id = req.params.id
-    await DriverService.deleteUser({id}, (result: any) => {
-        res.send(result)
-    })
-};
-
-// listar todos  - get - /users
-
-export let listAllUser = async(req: Request, res: Response) => {
-    await DriverService.listAllUser((result: any) => {
-        res.send(result)
-    })
-};
-
-// deleteByName - delete = /users/{id}
-
-export let deleteUserByName = async(req: Request, res: Response) => {
-    let name = req.params.name
-    await DriverService.deleteUserByName({name}, (result: any) => {
-        res.send(result)
-    })
+    res.send(await DriverService.deleteDriver({id}))
+   
 };

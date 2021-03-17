@@ -17,5 +17,3 @@ const transports = new mongoose.Schema({
 })
 
 export default mongoose.model('transports', transports)
-
-Date.now()
