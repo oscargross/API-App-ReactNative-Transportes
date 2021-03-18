@@ -5,7 +5,7 @@ import transportSchema from '../schema/transportSchema';
 
 export let createTransport = async(req: Request, res: Response) => {
     let transport = req.body;
-    res.send (await transportService.create ({transport}, transportSchema))  
+    res.send (await transportService.create (transport, transportSchema))  
 };
 
 export let readAllTransports = async (req: Request, res: Response)=>  {
@@ -15,19 +15,19 @@ export let readAllTransports = async (req: Request, res: Response)=>  {
 
 export let findTransportByParam = async (req: Request, res: Response)=>  {
     let param = req.params.param
-    res.send(await transportService.findByParam({param}, transportSchema))
+    res.send(await transportService.findByParam(param, transportSchema))
    
 };
 
 export let updateTransport = async (req: Request, res: Response)=>  {
     let id = req.params.id
     let info = req.body;
-    res.send(await transportService.update({id, info}, transportSchema))
+    res.send(await transportService.update(id, info, transportSchema))
    
 };
 
 export let deleteTransport = async (req: Request, res: Response)=>  {
     let id = req.params.id
-    res.send(await transportService.del({id}, transportSchema))
+    res.send(await transportService.del(id, transportSchema))
    
 };

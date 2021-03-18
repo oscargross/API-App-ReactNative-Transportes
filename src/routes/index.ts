@@ -10,7 +10,7 @@ export const Routes = () => {
     Drivers(routes);
     Company(routes);
     Transport(routes);
-    return Router();
+    return routes;
 }
 
 const Drivers = (_routes: any) => {
@@ -25,8 +25,8 @@ const Drivers = (_routes: any) => {
 
 const Company = (_routes: any) => {
     _routes.route('/company')
-        .get(companyController.createCompany)
-        .post(companyController.readAllCompanys);
+        .post(companyController.createCompany)
+        .get(companyController.readAllCompanys);
     _routes.route('/company/:id')
         .get(companyController.findCompanyByParam)
         .put(companyController.updateCompany)
