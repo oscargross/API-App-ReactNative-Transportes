@@ -1,39 +1,33 @@
 import { Request, Response } from 'express'
-import  * as DriverService from '../services/DriverService'
+import  * as DriverService from '../services/AccessDBService'
+import driverSchema from '../schema/driverSchema';
 
-
-// create - post - /users
 
 export let createDriver = async(req: Request, res: Response) => {
     let driver = req.body;
-    res.send (await DriverService.createDriver ({driver}))  
+    res.send (await DriverService.create ({driver}, driverSchema))  
 };
 
-
-
-// read - get - /users/{id}
 export let readAllDrivers = async (req: Request, res: Response)=>  {
-    res.send(await DriverService.readAllDrivers())
+    res.send(await DriverService.readAll(driverSchema))
    
 };
 
-
 export let findDriverByParam = async (req: Request, res: Response)=>  {
     let param = req.params.param
-    res.send(await DriverService.findDriverByParam({param}))
+    res.send(await DriverService.findByParam({param}, driverSchema))
    
 };
 
 export let updateDriver = async (req: Request, res: Response)=>  {
     let id = req.params.id
     let info = req.body;
-
-    res.send(await DriverService.updateDriver({id, info}))
+    res.send(await DriverService.update({id, info}, driverSchema))
    
 };
 
 export let deleteDriver = async (req: Request, res: Response)=>  {
     let id = req.params.id
-    res.send(await DriverService.deleteDriver({id}))
+    res.send(await DriverService.del({id}, driverSchema))
    
 };

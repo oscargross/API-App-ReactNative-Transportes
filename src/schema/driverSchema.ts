@@ -12,9 +12,37 @@ const drivers = new mongoose.Schema({
     clt:{
         type: String,
         required: true
-    }
+    },
+    licences:[
+        {
+            licence:{
+                type: String,
+                required: true
+            },
+            licencePhoto:{
+                type: String,
+                required: true
+            }
+        }
+    ],
+    vehicles:[
+        {
+            idVehicle: {
+                type: String,
+                required: true
+            },
+            placa: {
+                type: String,
+                required: true
+            },
+            type: {
+                type: String,
+                required: true
+            },            
+        }
+    ]
     
 })
+
 const driver = mongoose.model('drivers', drivers)
 export default driver
-

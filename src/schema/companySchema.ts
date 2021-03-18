@@ -1,6 +1,6 @@
 import mongoose from '../repository/db'
 
-const clients = new mongoose.Schema({
+const companys = new mongoose.Schema({
     name: {
         type: String,
         required: true
@@ -17,4 +17,4 @@ const clients = new mongoose.Schema({
     
 })
 
-export default mongoose.model('clients', clients)
+export default mongoose.model('companys', companys)
