@@ -4,25 +4,41 @@ import * as driverController from '../controllers/DriverController';
 import * as companyController from '../controllers/CompanyController';
 import * as transportController from '../controllers/TransportController';
 
-
 const routes = Router();
 
-routes.post('/drivers', driverController.createDriver);
-routes.get('/drivers', driverController.readAllDrivers);
-routes.get('/users/:id', driverController.findDriverByParam);
-routes.put('/users/:id', driverController.updateDriver);
-routes.delete('/users/:id', driverController.deleteDriver);
+export const Routes = () => {
+    Drivers(routes);
+    Company(routes);
+    Transport(routes);
+    return Router();
+}
 
-routes.post('/company', companyController.createCompany);
-routes.get('/company', companyController.readAllCompanys);
-routes.get('/company/:id', companyController.findCompanyByParam);
-routes.put('/company/:id', companyController.updateCompany);
-routes.delete('/company/:id', companyController.deleteCompany);
+const Drivers = (_routes: any) => {
+    _routes.route('/drivers')
+        .get(driverController.readAllDrivers)
+        .post(driverController.createDriver);
+    _routes.route('/drivers/:id')
+        .get(driverController.findDriverByParam)
+        .put(driverController.updateDriver)
+        .delete(driverController.deleteDriver)
+}
 
-routes.post('/transport', transportController.createTransport);
-routes.get('/transport', transportController.readAllTransports);
-routes.get('/transport/:id', transportController.findTransportByParam);
-routes.put('/transport/:id', transportController.updateTransport);
-routes.delete('/transport/:id', transportController.deleteTransport);
+const Company = (_routes: any) => {
+    _routes.route('/company')
+        .get(companyController.createCompany)
+        .post(companyController.readAllCompanys);
+    _routes.route('/company/:id')
+        .get(companyController.findCompanyByParam)
+        .put(companyController.updateCompany)
+        .delete(companyController.deleteCompany);
+}
 
-export default routes;
+const Transport = (_routes: any) => {
+    _routes.route('/transport')
+        .get(transportController.readAllTransports)
+        .post(transportController.createTransport);
+    _routes.route('/transport/:id')
+        .get(companyController.findCompanyByParam)
+        .put(transportController.updateTransport)
+        .delete(transportController.deleteTransport);
+}
