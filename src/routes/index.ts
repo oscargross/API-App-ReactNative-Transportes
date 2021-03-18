@@ -3,13 +3,22 @@ import { Router } from 'express';
 import * as driverController from '../controllers/DriverController';
 import * as companyController from '../controllers/CompanyController';
 import * as transportController from '../controllers/TransportController';
+import { Swagger } from '../docs/index';
 
 const routes = Router();
+
+const defaultReturn = () => ({
+    core: 'API Renatinho de Moura',
+    version: 'beta test',
+    date: new Date(),
+  });
 
 export const Routes = () => {
     Drivers(routes);
     Company(routes);
     Transport(routes);
+    Swagger(routes);
+    routes.use((_, res) => res.status(404).json(defaultReturn()));
     return routes;
 }
 

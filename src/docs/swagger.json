@@ -1,0 +1,64 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+      "version": "1.0.0",
+      "title": "API Renatinho de Moura"
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "basicAuth": {
+      "type": "basic"
+    }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "Root",
+      "description": "Default's API Route"
+    }
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "tags": [
+          "Root"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Root"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Root": {
+      "properties": {
+        "core": {
+          "type": "string",
+          "example": "API to Configuration"
+        },
+        "version": {
+          "type": "string",
+          "example": "v1"
+        },
+        "date": {
+          "type": "string",
+          "example": "2020-01-24T17:58:56.673Z"
+        }
+      }
+    }
+  }
+}
