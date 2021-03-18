@@ -1,22 +1,19 @@
-import driverSchema from '../schema/driverSchema'
-import driver from '../schema/driverSchema';
 
-
-export let createDriver = async ({ driver }: any) => {
+export let create = async ({ driver }: any, Schema : any) => {
     try {
         console.log(driver)
-        driverSchema.create(
+        Schema.create(
             driver
         );
         return driver
     } catch (error) {
-        return { message: error }
+        return { message: error.message }
     }
 };
 
-export let readAllDrivers = async () => {
+export let readAll = async (Schema : any) => {
     try {
-        const allDrivers = await  driverSchema.find({}).catch( (err: any) => {
+        const allDrivers = await  Schema.find({}).catch( (err: any) => {
             console.log(err);
             throw new Error("Some Error Happened ");
             
@@ -28,9 +25,9 @@ export let readAllDrivers = async () => {
     }
 };
 
-export let findDriverByParam = async ({ param }: any) => {
+export let findByParam = async ({ param }: any, Schema : any) => {
     try {
-        const driver = await driverSchema.findOne({param}).catch( (err: any) => {
+        const driver = await Schema.findOne({param}).catch( (err: any) => {
             console.log(err);
             throw new Error("Some Error Happened ");
             
@@ -44,10 +41,10 @@ export let findDriverByParam = async ({ param }: any) => {
 };
 
 
-export let updateDriver = ({id, info}: any) => {
+export let update = ({id, info}: any, Schema : any) => {
 
     try {
-        const driver = driverSchema.findByIdAndUpdate({id}, {
+        const driver = Schema.findByIdAndUpdate({id}, {
             $set: {info}
         }).catch( (err: any) => {
             console.log(err);
@@ -57,15 +54,15 @@ export let updateDriver = ({id, info}: any) => {
         return driver
 
     } catch (error) {
-        return { message: error }
+        return { message: error.message }
     }
 
 
 };
 
-export let deleteDriver = async ({ id }: any) => {
+export let del = async ({ id }: any, Schema : any) => {
     try {
-        const driverDeleted = await driverSchema.findByIdAndDelete({id}).catch( (err: any) => {
+        const driverDeleted = await Schema.findByIdAndDelete({id}).catch( (err: any) => {
             console.log(err);
             throw new Error("Some Error Happened");
             
