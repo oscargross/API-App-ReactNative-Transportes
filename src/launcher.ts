@@ -1,6 +1,6 @@
 
 
-import routes from './routes';
+import { Routes } from './routes';
 import {config as dotenv} from 'dotenv'
 import { InitDatabase } from './database/database';
 import { InitApp } from './app';
@@ -12,5 +12,5 @@ const uri = process.env.MONGO_URL_CONNECTION_BD_LOCAL || process.env.MONGO_URL_C
 
 export const Launcher = () => {
     InitDatabase(uri);
-    InitApp(routes);
+    InitApp(Routes());
 }
