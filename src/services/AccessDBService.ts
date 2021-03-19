@@ -23,25 +23,13 @@ export let create = async (info : any, Schema : any) => {
     }
 };
 
-export let readAll = async (Schema : any) => {
-    try {
-        
-        const allDrivers = await  Schema.find({}).catch( (err: any) => {
-            throw new Error(err);  
-            
-        })
-        return allDrivers
-        
-    } catch (error) {
-        console.log("Error: "+error.message)
-        throw Boom.badRequest(error.message).output.payload
-    }
-};
 
 export let findByParam = async (params : any, Schema : any) => {
     try {
         
-        const result = await Schema.find(params);        
+        const result = await Schema.find(params);    
+        console.log(result);
+            
         return result ? result : null    
         
     } catch (error) {
@@ -71,7 +59,7 @@ export let update = async (id: any , info: any, Schema : any) => {
 export let del = async ( id : any, Schema : any) => {
     try {
 
-        const driverDeleted = await Schema.findByIdAndDelete(id, {new: true})
+        const driverDeleted = await Schema.findByIdAndDelete(id)
         return driverDeleted
     
         
