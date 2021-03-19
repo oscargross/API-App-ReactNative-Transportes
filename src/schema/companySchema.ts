@@ -13,7 +13,6 @@ const companys = new mongoose.Schema({
         type: String,
         required: true
     }
-
     
 })
 

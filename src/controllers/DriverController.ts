@@ -2,6 +2,7 @@ import Boom from '@hapi/boom';
 import { Request, Response } from 'express'
 import  * as DriverService from '../services/AccessDBService'
 import driverSchema from '../schema/driverSchema';
+import { findDriverParam } from '../utils/driverUtils'
 
 
 export let createDriver = async(req: Request, res: Response) => {
@@ -13,26 +14,21 @@ export let createDriver = async(req: Request, res: Response) => {
             res.status(500).json(Boom.internal('Internal Server Error').output.payload))
 };
 
-export let readAllDrivers = async (req: Request, res: Response)=>  {
-    return DriverService.readAll(driverSchema)
-        .then(result => res.status(200).json(result))
-        .catch(error => 
-            error.statusCode ? res.status(error.statusCode).json(error) : 
-            res.status(500).json(Boom.internal('Internal Server Error').output.payload))
-};
-
 export let findDriverByParam = async (req: Request, res: Response) =>  {
-    const { id } = req.params
-    return DriverService.findByParam(id, driverSchema)
-    .then(result => res.status(200).json(result))
+    const {name, id} = req.query
+
+    const params = findDriverParam({name, id})
+
+    return DriverService.findByParam(params, driverSchema)
+    .then(result => result ? res.status(200).json(result) : res.sendStatus(204))
     .catch(error => 
         error.statusCode ? res.status(error.statusCode).json(error) : 
         res.status(500).json(Boom.internal('Internal Server Error').output.payload))
 };
 
 export let updateDriver = async (req: Request, res: Response)=>  {
-    const { id } = req.params;
-    const { info } = req.body;
+    const { id } = req.query;
+    const  info  = req.body;
     return DriverService.update(id, info, driverSchema)
         .then(result => res.status(200).json(result))
         .catch(error => 
@@ -42,7 +38,7 @@ export let updateDriver = async (req: Request, res: Response)=>  {
 };
 
 export let deleteDriver = async (req: Request, res: Response)=>  {
-    const { id } = req.params
+    const { id } = req.query
     return DriverService.del(id, driverSchema)
     .then(result => res.status(200).json(result))
     .catch(error => 

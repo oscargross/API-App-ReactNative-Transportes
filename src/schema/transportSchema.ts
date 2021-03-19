@@ -31,16 +31,13 @@ addressTo: {
     deliveryDate:{
       
         type: Date,
-        required: true
     },
 
     valueNF:{
         type: Number,
-        required: true
     },
     numberNF:{
         type: Number,
-        required: true
     },
 
     priceTransport:{
@@ -69,7 +66,6 @@ addressTo: {
 
     signDelivery:{
         type: String,
-        required: true
     }
     
 
