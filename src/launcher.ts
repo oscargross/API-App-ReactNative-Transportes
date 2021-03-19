@@ -9,7 +9,6 @@ dotenv()
 
 const uri = process.env.MONGO_URL_CONNECTION_BD_LOCAL || process.env.MONGO_URL_CONNECTION_BD_DEV
 
-
 export const Launcher = () => {
     InitDatabase(uri);
     InitApp(Routes());
