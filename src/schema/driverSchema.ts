@@ -9,6 +9,10 @@ const drivers = new mongoose.Schema({
         type: String,
         required: true
     },
+    cpf: {
+        type: String,
+        required: true
+    },
     clt:{
         type: String,
         required: true

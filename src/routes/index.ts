@@ -23,13 +23,12 @@ export const Routes = () => {
 }
 
 const Drivers = (_routes: any) => {
-    _routes.route('/drivers')
-        .get(driverController.readAllDrivers)
-        .post(driverController.createDriver);
-    _routes.route('/drivers/:id')
+    _routes.route('/driver')
         .get(driverController.findDriverByParam)
+        .post(driverController.createDriver)
         .put(driverController.updateDriver)
         .delete(driverController.deleteDriver)
+  
 }
 
 const Company = (_routes: any) => {

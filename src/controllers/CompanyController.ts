@@ -14,7 +14,8 @@ export let readAllCompanys = async (req: Request, res: Response)=>  {
 };
 
 export let findCompanyByParam = async (req: Request, res: Response)=>  {
-    let param = req.params.param
+    let param = req.params.id
+
     res.send(await companyService.findByParam(param, companySchema))
    
 };
