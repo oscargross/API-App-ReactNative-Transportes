@@ -1,34 +1,49 @@
+import Boom from '@hapi/boom';
 import { Request, Response } from 'express'
 import  * as companyService from '../services/AccessDBService'
 import companySchema from '../schema/companySchema';
+import { findCompanyParam } from '../utils/companyUtils'
+
 
 
 export let createCompany = async(req: Request, res: Response) => {
-    let company = req.body;
-    res.send (await companyService.create (company, companySchema))  
+    const { body: driver } = req
+    return companyService.create(driver, companySchema)
+        .then(result => res.status(201).json(result))
+        .catch(error => 
+            error.statusCode ? res.status(error.statusCode).json(error) : 
+            res.status(500).json(Boom.internal('Internal Server Error').output.payload))
 };
 
-export let readAllCompanys = async (req: Request, res: Response)=>  {
-    res.send(await companyService.readAll(companySchema))
-   
-};
+export let findCompanyByParam = async (req: Request, res: Response) =>  {
+    const {name, id, cnpj} = req.query
 
-export let findCompanyByParam = async (req: Request, res: Response)=>  {
-    let param = req.params.id
+    const params = findCompanyParam({name, id, cnpj})
 
-    res.send(await companyService.findByParam(param, companySchema))
-   
+    return companyService.findByParam(params, companySchema)
+    .then(result => result ? res.status(200).json(result) : res.sendStatus(204))
+    .catch(error => 
+        error.statusCode ? res.status(error.statusCode).json(error) : 
+        res.status(500).json(Boom.internal('Internal Server Error').output.payload))
 };
 
 export let updateCompany = async (req: Request, res: Response)=>  {
-    let id = req.params.id
-    let info = req.body;
-    res.send(await companyService.update(id, info, companySchema))
+    const { id } = req.query;
+    const  info  = req.body;
+    return companyService.update(id, info, companySchema)
+        .then(result => res.status(200).json(result))
+        .catch(error => 
+            error.statusCode ? res.status(error.statusCode).json(error) : 
+            res.status(500).json(Boom.internal('Internal Server Error').output.payload))
    
 };
 
 export let deleteCompany = async (req: Request, res: Response)=>  {
-    let id = req.params.id
-    res.send(await companyService.del(id, companySchema))
+    const { id } = req.query
+    return companyService.del(id, companySchema)
+    .then(result => res.status(200).json(result))
+    .catch(error => 
+        error.statusCode ? res.status(error.statusCode).json(error) : 
+        res.status(500).json(Boom.internal('Internal Server Error').output.payload))
    
 };

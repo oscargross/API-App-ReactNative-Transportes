@@ -15,9 +15,9 @@ export let createDriver = async(req: Request, res: Response) => {
 };
 
 export let findDriverByParam = async (req: Request, res: Response) =>  {
-    const {name, id} = req.query
+    const {name, id, cpf} = req.query
 
-    const params = findDriverParam({name, id})
+    const params = findDriverParam({name, id, cpf})
 
     return DriverService.findByParam(params, driverSchema)
     .then(result => result ? res.status(200).json(result) : res.sendStatus(204))
