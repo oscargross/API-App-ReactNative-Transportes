@@ -1,4 +1,4 @@
-import mongoose from '../repository/db'
+import mongoose from 'mongoose'
 
 const drivers = new mongoose.Schema({
     name: {
